@@ -1,0 +1,4 @@
+When we have numeric data we can made these kinds of visualization 
+dot plots, stem and leaf graphs, histograms, box plots, ogive graphs, and scatter plots
+
+

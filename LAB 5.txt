@@ -1,0 +1,163 @@
+# -*- coding: utf-8 -*-
+
+
+
+#weighted Graph and Prority BFS Algorithms                                                                                                          
+import copy
+def UCS(graph,Initial,goal):
+    fringe=[]
+    fringe.append([[Initial],0])
+    visited=[]
+    while fringe:
+        path=fringe.pop(0)
+        node=path[0][-1]
+        if node ==goal:   
+            return path
+        child=[]
+        visited.append(node)
+        if node in graph:                  
+            child=graph[node]
+        for item in child:
+            if item in visited:
+                continue
+            new_path=copy.deepcopy(path)
+            new_path[0].append(item)
+            new_path[-1]+=child[item]
+            fringe.append(new_path)
+        fringe.sort(key=lambda x:x[1])
+    return 'failure'
+
+
+
+graph = {
+    'A': {'B':9, 'C':4, 'D':7},
+    'B': {'A':9, 'E':11},
+    'C': {'A':4, 'E':17, 'F':12},
+    'D': {'A':7, 'F':14},
+    'E': {'B':11, 'C':17, 'Z': 5},
+    'F': {'C':12, 'D':14, 'Z': 9}
+}
+
+
+
+
+#Graph={'A':['B','D'],'B':['E','C'],'D':['E','G','H'],'E':['F']}
+print("Uniformed Cost Search")
+print(UCS(graph,'A','Z'))
+print("-"*25)
+
+
+def best_fs(graph,initial,goal,heuristic):
+    
+    fringe=[]
+    visited=[]
+    fringe.append([[initial],heuristic[initial]])
+    
+    while len(fringe)!=0:
+        path=fringe.pop(0)
+        node=path[0][-1]
+        if node==goal:
+            
+            return path,compute_cost(graph,path)
+        child=[]
+        visited.append(node)
+        if node in graph:
+        
+            child=graph[node]
+            
+        for item in child:
+            if item in visited:
+                continue
+            new_path=copy.deepcopy(path)
+            new_path[0].append(item)
+            new_path[-1]=heuristic[item]
+            fringe.append(new_path)
+        fringe.sort(key=lambda x:x[1])
+            
+    return 'Failure'
+
+graph = {
+    'A': {'B':9, 'C':4, 'D':7},
+    'B': {'A':9, 'E':11},
+    'C': {'A':4, 'E':17, 'F':12},
+    'D': {'A':7, 'F':14},
+    'E': {'B':11, 'C':17, 'Z': 5},
+    'F': {'C':12, 'D':14, 'Z': 9}
+}
+
+## heuristic value
+heuristic = {
+             'A':21,
+             'B':14,
+             'C':18,
+             'D':18,
+             'E':5,
+             'F':8,
+             'Z':0
+             }
+
+def compute_cost(graph,path):
+    actual_path=path[0]
+    cost=0
+    for i in range(len(path[0])-1):
+        cost+=graph[actual_path[i]][actual_path[i+1]]
+    return cost
+
+
+print(best_fs(graph,'A','Z',heuristic))
+
+
+print("*"*25)
+
+
+def a_star(graph,initial,goal,heuristic):
+    
+    fringe=[]
+    visited=[]
+    fringe.append([[initial],0+heuristic[initial]])
+    
+    while len(fringe)!=0:
+        path=fringe.pop(0)
+        node=path[0][-1]
+        if node==goal:
+            
+            return path,compute_cost(graph,path)
+        child=[]
+        visited.append(node)
+        if node in graph:
+        
+            child=graph[node]
+            
+        for item in child:
+            if item in visited:
+                continue
+            new_path=copy.deepcopy(path)
+            new_path[0].append(item)
+            new_path[-1]=compute_cost(graph,new_path)+heuristic[item] #f(n)=g(n)+h(n)
+            fringe.append(new_path)
+        fringe.sort(key=lambda x:x[1])
+            
+    return 'Failure'
+
+graph = {
+    'A': {'B':9, 'C':4, 'D':7},
+    'B': {'A':9, 'E':11},
+    'C': {'A':4, 'E':17, 'F':12},
+    'D': {'A':7, 'F':14},
+    'E': {'B':11, 'C':17, 'Z': 5},
+    'F': {'C':12, 'D':14, 'Z': 9}
+}
+
+## heuristic value
+heuristic = {
+             'A':21,
+             'B':14,
+             'C':18,
+             'D':18,
+             'E':5,
+             'F':8,
+             'Z':0
+             }
+
+
+print(a_star(graph,'A','Z',heuristic))

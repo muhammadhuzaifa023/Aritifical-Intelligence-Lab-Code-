@@ -1,0 +1,66 @@
+Algorithms
+(μ/ρ(+/,)λ)-SA-ES (ES)
+(μ/μI,λ)-CMA-ES (CMAES)
+Genetic Algorithms (GA)
+Multi-objective: NSGA-II (NSGA2)
+Differential Evolution (DE)
+Genetic Programming (TreeGP)
+Operators
+Mutations
+
+ES
+(an)isotropic Gaussian
+(an)isotropic Cauchy
+GA
+binary
+flip
+inversion
+real valued
+uniform
+Gaussian
+BGA (domain range)
+(MI)PM (power)
+PLM (polynomial)
+combinatorial
+inversion
+insertion
+swap2
+scramble
+shifting
+Recombinations
+
+average
+marriage
+Crossovers
+
+binary
+SPX (single point)
+TPX (two point)
+SHFX (shuffle)
+UX (uniform)
+BINX (binary)
+EXPX (exponential)
+BSX (binary subset)
+real valued
+DC (discrete)
+AX (average)
+WAX (weighted average)
+IC (intermediate)
+LC (line)
+HX (heuristic)
+(MI)LX (Laplace)
+SBX (simulated binary)
+combinatorial
+PMX (partially-mapped)
+OX1 (order)
+OX2 (order-based)
+CX (cycle)
+POS (position-based)
+Selections
+
+rank-based fitness assignment
+(μ, λ)-uniform ranking
+roulette (fitness proportionate selection, FSP)
+stochastic universal sampling (SUS)
+tournament
+truncation
